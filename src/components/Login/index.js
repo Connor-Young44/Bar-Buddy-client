@@ -16,6 +16,14 @@ const Login = () => {
     lastName: "",
     isBuisness: false,
   });
+  const [barDetails, setBarDetails] = useState({
+    name: "",
+    location: "",
+    desc: "",
+    imageUrl: "",
+    numberOfTables: 0,
+    userId: "",
+  });
   //login mutation call
   const [login] = useMutation(LOGIN_MUTATION, {
     variables: {
