@@ -5,7 +5,9 @@ import { LOGIN_MUTATION, SIGNUP_MUTATION } from "../../graphQl/mutations";
 import { AUTH_TOKEN } from "../../constants";
 
 const Login = () => {
+  //start state for apollo error
   const [error, setError] = useState("");
+  //the state of the form saved as object
   const [formState, setFormState] = useState({
     login: true,
     email: "",
@@ -25,7 +27,7 @@ const Login = () => {
       window.location.href = "/";
     },
     onError: (error) => {
-      console.log(error.message);
+      //console.log(error.message);
       setError(error.message);
     },
   });
@@ -39,7 +41,8 @@ const Login = () => {
       isBuisness: formState.isBuisness,
     },
     onError: (error) => {
-      console.log({ error });
+      setError(error.message);
+      //console.log({ error });
     },
     onCompleted: ({ signup }) => {
       //localStorage.setItem(AUTH_TOKEN, signup.token);
@@ -89,7 +92,6 @@ const Login = () => {
           </div>
         )}
 
-        {error && <h1>{error}</h1>}
         <input
           value={formState.email}
           onChange={(e) =>
@@ -133,6 +135,7 @@ const Login = () => {
             ? "need to create an account?"
             : "already have an account?"}
         </button>
+        {error && <h1>{error}</h1>}
       </div>
     </div>
   );
