@@ -16,22 +16,18 @@ const Login = () => {
     lastName: "",
     isBuisness: false,
   });
-  const [barDetails, setBarDetails] = useState({
-    name: "",
-    location: "",
-    desc: "",
-    imageUrl: "",
-    numberOfTables: 0,
-    userId: "",
-  });
+
   //login mutation call
   const [login] = useMutation(LOGIN_MUTATION, {
     variables: {
       email: formState.email,
       password: formState.password,
     },
+
     onCompleted: ({ login }) => {
+      localStorage.clear();
       localStorage.setItem(AUTH_TOKEN, login.token);
+      //console.log(login.user.firstName);
       window.location.href = "/";
     },
     onError: (error) => {
@@ -53,6 +49,7 @@ const Login = () => {
       //console.log({ error });
     },
     onCompleted: ({ signup }) => {
+      if (formState.isBuisness) return (window.location.href = "/barDetails");
       //localStorage.setItem(AUTH_TOKEN, signup.token);
       window.location.href = "/";
     },

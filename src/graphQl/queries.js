@@ -12,3 +12,15 @@ export const GET_ALL_BARS = gql`
     }
   }
 `;
+
+//single loged in user
+export const GET_CURRENT_USER = gql`
+  query LoggedInUser {
+    me {
+      id
+      firstName
+      lastName
+      isBuisness
+    }
+  }
+`;

@@ -13,24 +13,17 @@ import {
   //useQuery,
   //gql,
 } from "@apollo/client";
+import { AUTH_TOKEN } from "./constants";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphQl",
   cache: new InMemoryCache(),
+  headers: {
+    authorization: localStorage.getItem(AUTH_TOKEN),
+    "client-name": "WidgetX Ecom [web]",
+    "client-version": "1.0.0",
+  },
 });
-//test connection--
-// client
-//   .query({
-//     query: gql`
-//       query GetBars {
-//         bars {
-//           name
-//           desc
-//         }
-//       }
-//     `,
-//   })
-//   .then((result) => console.log(result));
 
 ReactDOM.render(
   <React.StrictMode>
