@@ -16,8 +16,11 @@ export default function HomePage() {
   //deal with errors
   if (error) return <p>Error! {error.message}</p>;
 
-  console.log(data.bars);
+  //console.log(data.bars);
   const res = data.bars;
+
+  //get user
+
   return (
     <div>
       <div>
