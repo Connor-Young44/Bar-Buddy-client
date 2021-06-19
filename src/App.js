@@ -14,7 +14,7 @@ function App() {
   const authToken = localStorage.getItem(AUTH_TOKEN);
   //console.log(authToken);
   //console.log(authToken);
-  const { data, loading, error, refetch } = useQuery(GET_CURRENT_USER, {
+  const { data, loading, error } = useQuery(GET_CURRENT_USER, {
     headers: {
       authorization: `${authToken}`,
     },
@@ -27,7 +27,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar refetch={refetch} />
+      <NavBar firstName={data.me.firstName} />
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />

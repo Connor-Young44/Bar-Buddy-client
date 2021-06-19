@@ -6,6 +6,7 @@ import LogoutButton from "../../pages/LogOut";
 
 const NavBar = (props) => {
   const authToken = localStorage.getItem(AUTH_TOKEN);
+  //const userData = new InMemoryCache({"user"})
 
   return (
     <div>
