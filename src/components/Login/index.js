@@ -49,9 +49,9 @@ const Login = () => {
       //console.log({ error });
     },
     onCompleted: ({ signup }) => {
-      if (formState.isBuisness) return (window.location.href = "/barDetails");
-      //localStorage.setItem(AUTH_TOKEN, signup.token);
-      window.location.href = "/";
+      formState.isBuisness
+        ? (window.location.href = "/barDetails")
+        : (window.location.href = "/");
     },
   });
 

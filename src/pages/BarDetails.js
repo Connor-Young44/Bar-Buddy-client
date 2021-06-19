@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+//import React, { useState } from "react";
+import { useApolloClient, useQuery } from "@apollo/client";
+import NewBarForm from "../components/NewBarForm";
+import { GET_ALL_BARS, GET_CURRENT_USER } from "../graphQl/queries";
 
 export default function BarDetails() {
-  const [barDetails, setBarDetails] = useState({
-    name: "",
-    location: "",
-    desc: "",
-    imageUrl: "",
-    numberOfTables: 0,
-    userId: "",
+  const client = useApolloClient();
+
+  const { loading, error, data } = useQuery(GET_ALL_BARS);
+
+  //deal with loading data
+  if (loading) return "loading...";
+  //deal with errors
+  if (error) return <p>Error! {error.message}</p>;
+
+  const bars = data.bars;
+  const user = client.cache.readQuery({
+    query: GET_CURRENT_USER,
   });
-  return <div></div>;
+  //check if user has a bar already
+  const hasBar = bars.filter(
+    (bar) => parseInt(bar.userId) === parseInt(user.me.id)
+  );
+
+  return <div>{hasBar.length === 0 && <NewBarForm userId={user.me.id} />}</div>;
 }

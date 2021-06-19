@@ -9,6 +9,7 @@ export const GET_ALL_BARS = gql`
       imageUrl
       desc
       numberOfTables
+      userId
     }
   }
 `;
