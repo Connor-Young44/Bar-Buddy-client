@@ -19,8 +19,6 @@ export default function HomePage() {
   //console.log(data.bars);
   const res = data.bars;
 
-  //get user
-
   return (
     <div>
       <div>

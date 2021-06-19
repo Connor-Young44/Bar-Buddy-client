@@ -29,3 +29,26 @@ export const LOGIN_MUTATION = gql`
     }
   }
 `;
+
+export const CREATE_BAR_MUTATION = gql`
+  mutation CreateBarMutation(
+    $name: String!
+    $location: String!
+    $desc: String!
+    $imageUrl: String!
+    $numberOfTables: Int!
+    $userId: Int!
+  ) {
+    createBar(
+      name: $name
+      location: $location
+      desc: $desc
+      imageUrl: $imageUrl
+      numberOfTables: $numberOfTables
+      userId: $userId
+    ) {
+      id
+      name
+    }
+  }
+`;

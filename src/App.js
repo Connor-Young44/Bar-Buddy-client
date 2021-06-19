@@ -5,6 +5,7 @@ import { AUTH_TOKEN } from "./constants";
 import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import Login from "./components/Login";
+import BarDetails from "./pages/BarDetails";
 //import query
 import { useQuery } from "@apollo/client";
 import { GET_CURRENT_USER } from "./graphQl/queries";
@@ -29,6 +30,7 @@ function App() {
     <div className="App">
       <NavBar firstName={data.me.firstName} />
       <Switch>
+        <Route path="/barManagement" component={BarDetails} />
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
         <Route path="/" component={HomePage} />
