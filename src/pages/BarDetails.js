@@ -1,6 +1,7 @@
 //import React, { useState } from "react";
 import { useApolloClient, useQuery } from "@apollo/client";
 import NewBarForm from "../components/NewBarForm";
+import ManageBar from "../components/ManageBar";
 import { GET_ALL_BARS, GET_CURRENT_USER } from "../graphQl/queries";
 
 export default function BarDetails() {
@@ -22,5 +23,9 @@ export default function BarDetails() {
     (bar) => parseInt(bar.userId) === parseInt(user.me.id)
   );
 
-  return <div>{hasBar.length === 0 && <NewBarForm userId={user.me.id} />}</div>;
+  return (
+    <div>
+      {hasBar.length === 0 ? <NewBarForm userId={user.me.id} /> : <ManageBar />}
+    </div>
+  );
 }

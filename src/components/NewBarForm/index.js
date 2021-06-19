@@ -28,9 +28,7 @@ export default function NewBarForm(props) {
       //console.log({ error });
     },
     onCompleted: ({ createBar }) => {
-      formState.isBuisness
-        ? (window.location.href = "/barDetails")
-        : (window.location.href = "/");
+      window.location.href = "/barDetails";
     },
   });
   // handle button submit
