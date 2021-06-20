@@ -6,6 +6,7 @@ export const GET_ALL_BARS = gql`
     bars {
       id
       name
+      location
       imageUrl
       desc
       numberOfTables

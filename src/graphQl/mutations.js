@@ -52,3 +52,33 @@ export const CREATE_BAR_MUTATION = gql`
     }
   }
 `;
+
+export const UPDATE_BAR_MUTATION = gql`
+  mutation UpdateBarMutation(
+    $id: Int!
+    $name: String!
+    $location: String!
+    $desc: String!
+    $imageUrl: String!
+    $numberOfTables: Int!
+    $userId: Int!
+  ) {
+    editBar(
+      id: $id
+      name: $name
+      location: $location
+      desc: $desc
+      imageUrl: $imageUrl
+      numberOfTables: $numberOfTables
+      userId: $userId
+    ) {
+      id
+      name
+      location
+      desc
+      imageUrl
+      numberOfTables
+      userId
+    }
+  }
+`;

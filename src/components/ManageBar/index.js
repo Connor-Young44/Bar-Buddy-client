@@ -2,6 +2,9 @@ import { useApolloClient } from "@apollo/client";
 import { useState } from "react";
 
 import { GET_ALL_BARS, GET_CURRENT_USER } from "../../graphQl/queries";
+import EditBar from "../EditBar";
+import EditMenu from "../EditMenu";
+import GoLive from "../GoLive";
 
 export default function ManageBar() {
   const [option, setOption] = useState("");
@@ -18,7 +21,7 @@ export default function ManageBar() {
     (bar) => parseInt(bar.userId) === parseInt(user.me.id)
   );
 
-  console.log(thisBar[0]);
+  //console.log(thisBar[0]);
   return (
     <div>
       <h1>Welcome To Bar Buddy!</h1>
@@ -26,6 +29,11 @@ export default function ManageBar() {
       <button onClick={() => setOption("editMenu")}>Edit Your Menu</button>
       <button onClick={() => setOption("editBar")}>Edit Your Details</button>
       <button onClick={() => setOption("goLive")}>GO LIVE!</button>
+      <div>
+        {option === "editMenu" && <EditMenu />}
+        {option === "editBar" && <EditBar bar={thisBar} />}
+        {option === "goLive" && <GoLive />}
+      </div>
     </div>
   );
 }
