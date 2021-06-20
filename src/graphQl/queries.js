@@ -26,3 +26,16 @@ export const GET_CURRENT_USER = gql`
     }
   }
 `;
+
+export const GET_MENU_ITEMS = gql`
+  query MenuItems {
+    menuItems {
+      id
+      name
+      desc
+      imageUrl
+      price
+      barId
+    }
+  }
+`;

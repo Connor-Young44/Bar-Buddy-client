@@ -30,7 +30,7 @@ export default function ManageBar() {
       <button onClick={() => setOption("editBar")}>Edit Your Details</button>
       <button onClick={() => setOption("goLive")}>GO LIVE!</button>
       <div>
-        {option === "editMenu" && <EditMenu />}
+        {option === "editMenu" && <EditMenu bar={thisBar} />}
         {option === "editBar" && <EditBar bar={thisBar} />}
         {option === "goLive" && <GoLive />}
       </div>

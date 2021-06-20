@@ -82,3 +82,29 @@ export const UPDATE_BAR_MUTATION = gql`
     }
   }
 `;
+
+export const CREATE_ITEM_MUTATION = gql`
+  mutation CreateBarMutation(
+    $name: String!
+    $isFood: Boolean!
+    $desc: String!
+    $imageUrl: String!
+    $price: Int!
+    $barId: Int!
+  ) {
+    addMenuItem(
+      name: $name
+      isFood: $isFood
+      desc: $desc
+      imageUrl: $imageUrl
+      price: $price
+      barId: $barId
+    ) {
+      name
+      desc
+      price
+      imageUrl
+      barId
+    }
+  }
+`;
