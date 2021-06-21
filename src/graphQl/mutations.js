@@ -26,6 +26,11 @@ export const LOGIN_MUTATION = gql`
   mutation LoginMutation($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
+      user {
+        id
+        firstName
+        isBuisness
+      }
     }
   }
 `;
@@ -105,6 +110,18 @@ export const CREATE_ITEM_MUTATION = gql`
       price
       imageUrl
       barId
+    }
+  }
+`;
+
+export const UPDATE_USER = gql`
+  mutation UpdateUserMutation($id: Int!, $currentBar: Int) {
+    editUser(id: $id, currentBar: $currentBar) {
+      id
+      firstName
+      lastName
+      email
+      isBuisness
     }
   }
 `;

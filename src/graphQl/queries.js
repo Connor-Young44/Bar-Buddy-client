@@ -39,3 +39,15 @@ export const GET_MENU_ITEMS = gql`
     }
   }
 `;
+
+export const GET_TABLES = gql`
+  query Tables($barId: Int!) {
+    tables(barId: $barId) {
+      id
+      number
+      seats
+      occupiedBy
+      isFree
+    }
+  }
+`;

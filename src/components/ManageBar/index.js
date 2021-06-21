@@ -32,7 +32,7 @@ export default function ManageBar() {
       <div>
         {option === "editMenu" && <EditMenu bar={thisBar} />}
         {option === "editBar" && <EditBar bar={thisBar} />}
-        {option === "goLive" && <GoLive />}
+        {option === "goLive" && <GoLive bar={thisBar} />}
       </div>
     </div>
   );
