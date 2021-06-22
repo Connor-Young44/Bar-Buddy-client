@@ -6,31 +6,20 @@ import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import Login from "./components/Login";
 import BarDetails from "./pages/BarDetails";
+import BarUser from "./pages/BarUser";
 //import query
-import { useQuery } from "@apollo/client";
-import { GET_CURRENT_USER } from "./graphQl/queries";
+
 import Logout from "./pages/LogOut";
 
 function App() {
   const authToken = localStorage.getItem(AUTH_TOKEN);
-  //console.log(authToken);
-  //console.log(authToken);
-  const { data, loading, error } = useQuery(GET_CURRENT_USER, {
-    headers: {
-      authorization: `${authToken}`,
-    },
-    fetchPolicy: "network-only",
-  });
-  if (loading) return "loading..";
-  if (error) return error.message;
-
-  //console.log("me data", data.me);
-
+  if (!authToken) return <Login />;
   return (
     <div className="App">
-      <NavBar firstName={data.me.firstName} />
+      <NavBar />
       <Switch>
         <Route path="/barManagement" component={BarDetails} />
+        <Route path="/barUser" component={BarUser} />
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
         <Route path="/" component={HomePage} />

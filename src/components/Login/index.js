@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { LOGIN_MUTATION, SIGNUP_MUTATION } from "../../graphQl/mutations";
 import { AUTH_TOKEN } from "../../constants";
+import { GET_CURRENT_USER } from "../../graphQl/queries";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
   //start state for apollo error
@@ -16,22 +18,23 @@ const Login = () => {
     lastName: "",
     isBuisness: false,
   });
-
+  const history = useHistory();
   //login mutation call
   const [login] = useMutation(LOGIN_MUTATION, {
     variables: {
       email: formState.email,
       password: formState.password,
     },
-
-    onCompleted: ({ login }) => {
+    awaitRefetchQueries: [{ query: GET_CURRENT_USER }],
+    onCompleted: async ({ login }) => {
       localStorage.clear();
+
       localStorage.setItem(AUTH_TOKEN, login.token);
+      history.go(0);
       //console.log(login.user.firstName);
-      window.location.href = "/";
     },
     onError: (error) => {
-      //console.log(error.message);
+      console.log(error);
       setError(error.message);
     },
   });
@@ -57,8 +60,8 @@ const Login = () => {
 
   return (
     <div>
-      <h4 className="mv3">{formState.login ? "Login" : "Sign Up"}</h4>
-      <div className="flex flex-column">
+      <h4>{formState.login ? "Login" : "Sign Up"}</h4>
+      <div>
         {!formState.login && (
           <div>
             <input
@@ -120,7 +123,7 @@ const Login = () => {
           placeholder="Choose a safe password"
         />
       </div>
-      <div className="flex mt3">
+      <div>
         <button
           className="pointer mr2 button"
           onClick={formState.login ? login : signup}
@@ -140,6 +143,7 @@ const Login = () => {
             ? "need to create an account?"
             : "already have an account?"}
         </button>
+
         {error && <h1>{error}</h1>}
       </div>
     </div>

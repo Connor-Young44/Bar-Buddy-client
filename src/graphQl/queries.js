@@ -6,10 +6,16 @@ export const GET_ALL_BARS = gql`
     bars {
       id
       name
+      location
       imageUrl
       desc
       numberOfTables
       userId
+      tables {
+        id
+        number
+        occupiedBy
+      }
     }
   }
 `;
@@ -22,6 +28,54 @@ export const GET_CURRENT_USER = gql`
       firstName
       lastName
       isBuisness
+      currentBar
+    }
+  }
+`;
+
+export const GET_MENU_ITEMS = gql`
+  query MenuItems {
+    menuItems {
+      id
+      name
+      desc
+      imageUrl
+      price
+      barId
+    }
+  }
+`;
+
+export const GET_TABLES = gql`
+  query Tables($barId: Int!) {
+    tables(barId: $barId) {
+      id
+      number
+      seats
+      occupiedBy
+      isFree
+    }
+  }
+`;
+
+export const GET_LIVE_USERS = gql`
+  subscription LiveUsers {
+    userJoined {
+      id
+      firstName
+      lastName
+      currentBar
+    }
+  }
+`;
+
+export const GET_USERS = gql`
+  query Users($barId: Int!) {
+    users(barId: $barId) {
+      id
+      firstName
+      lastName
+      currentBar
     }
   }
 `;
