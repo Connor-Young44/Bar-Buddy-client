@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import Login from "./components/Login";
 import BarDetails from "./pages/BarDetails";
+import BarUser from "./pages/BarUser";
 //import query
 
 import Logout from "./pages/LogOut";
@@ -18,6 +19,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route path="/barManagement" component={BarDetails} />
+        <Route path="/barUser" component={BarUser} />
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
         <Route path="/" component={HomePage} />

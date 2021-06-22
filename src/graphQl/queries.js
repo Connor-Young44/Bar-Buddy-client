@@ -11,6 +11,11 @@ export const GET_ALL_BARS = gql`
       desc
       numberOfTables
       userId
+      tables {
+        id
+        number
+        occupiedBy
+      }
     }
   }
 `;
@@ -23,6 +28,7 @@ export const GET_CURRENT_USER = gql`
       firstName
       lastName
       isBuisness
+      currentBar
     }
   }
 `;
@@ -48,6 +54,28 @@ export const GET_TABLES = gql`
       seats
       occupiedBy
       isFree
+    }
+  }
+`;
+
+export const GET_LIVE_USERS = gql`
+  subscription LiveUsers {
+    userJoined {
+      id
+      firstName
+      lastName
+      currentBar
+    }
+  }
+`;
+
+export const GET_USERS = gql`
+  query Users($barId: Int!) {
+    users(barId: $barId) {
+      id
+      firstName
+      lastName
+      currentBar
     }
   }
 `;

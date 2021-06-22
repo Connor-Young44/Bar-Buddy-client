@@ -20,7 +20,7 @@ export default function BarInfo(props) {
       //console.log({ error });
     },
     onCompleted: ({ createBar }) => {
-      //window.location.href = "/barManagement";
+      window.location.href = "/barUser";
     },
   });
 

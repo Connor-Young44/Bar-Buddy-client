@@ -6,23 +6,60 @@ import reportWebVitals from "./reportWebVitals";
 
 import { BrowserRouter as Router } from "react-router-dom";
 //import apollo and graphql
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  //useQuery,
-  //gql,
-} from "@apollo/client";
-import { AUTH_TOKEN } from "./constants";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { HttpLink } from "apollo-link-http";
+import { WebSocketLink } from "apollo-link-ws";
 
-const client = new ApolloClient({
+import { AUTH_TOKEN } from "./constants";
+import { getMainDefinition } from "@apollo/client/utilities";
+import { split } from "apollo-link";
+
+//link for mutation and quiris
+const httpLink = new HttpLink({
   uri: "http://localhost:4000/graphQl",
-  cache: new InMemoryCache(),
   headers: {
     authorization: localStorage.getItem(AUTH_TOKEN),
     "client-name": "WidgetX Ecom [web]",
     "client-version": "1.0.0",
   },
+});
+//web socket link
+const wsLink = new WebSocketLink({
+  uri: "ws://localhost:4000/subscriptions",
+
+  options: {
+    reconnect: true,
+    connectionParams: {
+      authorization: localStorage.getItem(AUTH_TOKEN),
+    },
+  },
+});
+
+//link spliter
+const link = split(
+  ({ query }) => {
+    const { kind, operation } = getMainDefinition(query);
+    return kind === "OperationDefinition" && operation === "subscription";
+  },
+  wsLink,
+  httpLink
+);
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        users: {
+          merge(existing, incoming) {
+            return incoming;
+          },
+        },
+      },
+    },
+  },
+});
+const client = new ApolloClient({
+  link,
+  cache: cache,
 });
 
 ReactDOM.render(
