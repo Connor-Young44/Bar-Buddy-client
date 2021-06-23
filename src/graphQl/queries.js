@@ -34,8 +34,8 @@ export const GET_CURRENT_USER = gql`
 `;
 
 export const GET_MENU_ITEMS = gql`
-  query MenuItems {
-    menuItems {
+  query MenuItems($barId: Int!) {
+    menuItems(barId: $barId) {
       id
       name
       desc
@@ -76,6 +76,23 @@ export const GET_USERS = gql`
       firstName
       lastName
       currentBar
+    }
+  }
+`;
+
+export const GET_ORDERS = gql`
+  query Orders {
+    orders {
+      id
+      served
+      closed
+      qty
+      tableId
+      menuItems {
+        name
+        price
+        isFood
+      }
     }
   }
 `;

@@ -52,9 +52,7 @@ const Login = () => {
       //console.log({ error });
     },
     onCompleted: ({ signup }) => {
-      formState.isBuisness
-        ? (window.location.href = "/barDetails")
-        : (window.location.href = "/");
+      window.location.href = "/";
     },
   });
 
