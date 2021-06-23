@@ -1,9 +1,11 @@
 import { useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
+import { AUTH_TOKEN } from "../../constants";
 import { CREATE_ITEM_MUTATION } from "../../graphQl/mutations";
 import { GET_MENU_ITEMS } from "../../graphQl/queries";
 
 export default function EditMenu(props) {
+  const authToken = localStorage.getItem(AUTH_TOKEN);
   const [Error, setError] = useState("");
   const [formState, setFormState] = useState({
     name: "",
@@ -37,7 +39,14 @@ export default function EditMenu(props) {
     console.log(formState);
   };
   //get menu item
-  const { loading, error, data } = useQuery(GET_MENU_ITEMS);
+  const { loading, error, data } = useQuery(GET_MENU_ITEMS, {
+    headers: {
+      authorization: `${authToken}`,
+    },
+    variables: {
+      barId: Number(props.bar[0].id),
+    },
+  });
 
   //deal with loading data
   if (loading) return "loading...";

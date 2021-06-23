@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import React from "react";
+import OrderForm from "../components/OrderForm";
 import { AUTH_TOKEN } from "../constants";
 import { GET_ALL_BARS, GET_CURRENT_USER } from "../graphQl/queries";
 
@@ -11,24 +12,45 @@ export default function BarUser() {
     },
   });
   //read bars from cache
-  const allBars = useQuery(GET_ALL_BARS);
+  const allBars = useQuery(GET_ALL_BARS, {
+    pollInterval: 20000,
+  });
+
   //provide loading/error handlers
   if (userData.loading || allBars.loading) return "loading..";
-  if (userData.error || allBars.error) return <p> {userData.error.message};</p>;
+  if (userData.error || allBars.error) return <p>ERROR;</p>;
 
   //get users current bar from user info
   const barsArray = allBars.data.bars;
   const thisUser = userData.data.me;
-  console.log(barsArray);
-  console.log(thisUser);
-
   const thisBar = barsArray.filter(
     (bar) => parseInt(bar.id) === parseInt(thisUser.currentBar)
   );
-  console.log("this bar", thisBar[0]);
+  //get bar tables
+  const tables = thisBar[0].tables;
+  //console.log(tables);
+  //check if user id is in the table list
+  const assignedTable = tables.filter(
+    (table) => Number(table.occupiedBy) === Number(thisUser.id)
+  );
+  //console.log(assignedTable[0]);
   return (
     <div>
       <h1>welcome to {thisBar[0].name}</h1>
+      <div>
+        {assignedTable.length === 0 ? (
+          <h3>Please Wait To Be Seated :) </h3>
+        ) : (
+          <h2>Table Number: {assignedTable[0].number}</h2>
+        )}
+        {assignedTable.length !== 0 && (
+          <OrderForm
+            barId={thisBar[0].id}
+            userId={assignedTable[0].occupiedBy}
+            tableId={assignedTable[0].id}
+          />
+        )}
+      </div>
     </div>
   );
 }

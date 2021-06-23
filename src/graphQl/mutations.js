@@ -125,3 +125,30 @@ export const UPDATE_USER = gql`
     }
   }
 `;
+
+export const PLACE_ORDER = gql`
+  mutation PlaceOrder(
+    $served: Boolean
+    $closed: Boolean
+    $qty: Int!
+    $userId: Int!
+    $tableId: Int!
+    $menuItemId: Int!
+  ) {
+    placeOrder(
+      served: $served
+      closed: $closed
+      qty: $qty
+      userId: $userId
+      tableId: $tableId
+      menuItemId: $menuItemId
+    ) {
+      order {
+        served
+        closed
+        tableId
+        qty
+      }
+    }
+  }
+`;
