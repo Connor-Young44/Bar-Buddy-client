@@ -152,3 +152,11 @@ export const PLACE_ORDER = gql`
     }
   }
 `;
+
+export const EDIT_TABLE = gql`
+  mutation EditTableMutation($id: Int!, $occupiedBy: Int) {
+    editTable(id: $id, occupiedBy: $occupiedBy) {
+      id
+    }
+  }
+`;

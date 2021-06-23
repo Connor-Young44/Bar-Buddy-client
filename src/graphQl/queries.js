@@ -79,3 +79,20 @@ export const GET_USERS = gql`
     }
   }
 `;
+
+export const GET_ORDERS = gql`
+  query Orders {
+    orders {
+      id
+      served
+      closed
+      qty
+      tableId
+      menuItems {
+        name
+        price
+        isFood
+      }
+    }
+  }
+`;
