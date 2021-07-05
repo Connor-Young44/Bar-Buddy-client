@@ -1,0 +1,18 @@
+.goLive-body {
+  display: flex;
+  flex-direction: column;
+}
+.goLive-title {
+  color: aliceblue;
+  font-size: 2.5rem;
+  margin-top: 0;
+}
+.goLive-subtitle {
+  color: #1ba098;
+  font-size: 1.4rem;
+}
+.table-button {
+  border: dashed #1ba098 2px;
+  padding: 10px;
+  margin: 0 25px;
+}

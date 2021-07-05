@@ -1,4 +1,5 @@
 import { useMutation } from "@apollo/client";
+import "./index.css";
 import React from "react";
 import { AUTH_TOKEN } from "../../constants";
 import { UPDATE_USER } from "../../graphQl/mutations";
@@ -24,7 +25,9 @@ export default function LeaveBarButton(props) {
 
   return (
     <div>
-      <button onClick={leaveBar}>leave bar</button>
+      <button className="navbar-button logout" onClick={leaveBar}>
+        leave bar
+      </button>
     </div>
   );
 }

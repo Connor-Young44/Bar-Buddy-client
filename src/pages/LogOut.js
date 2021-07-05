@@ -1,11 +1,13 @@
 import React from "react";
 import { ApolloConsumer } from "@apollo/client";
+import "../components/NavBar/index.css";
 
 export default function LogoutButton() {
   return (
     <ApolloConsumer>
       {(client) => (
         <button
+          className="navbar-button"
           onClick={async () => {
             localStorage.clear();
 

@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./HomePage.css";
 import { useQuery } from "@apollo/client";
 
 //import query
@@ -34,7 +34,7 @@ export default function HomePage() {
   return (
     <div>
       <div>
-        <h1>Welcome to Bar Buddy!</h1>
+        <h1 className="homePage-title">Welcome to Bar Buddy!</h1>
       </div>
       <div>
         {res.map((bar) => (

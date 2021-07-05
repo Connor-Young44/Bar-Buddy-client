@@ -1,0 +1,27 @@
+.editDetails-title {
+  color: aliceblue;
+}
+.editDetails-form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 25%;
+  align-items: center;
+  justify-content: center;
+}
+
+.editDetails-inputs {
+  border: solid #1ba098 2px;
+  margin-bottom: 1rem;
+  color: #1ba098;
+}
+.editDetails-button {
+  border: dashed #1ba098;
+  font-size: 1.4rem;
+  padding: 10px;
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+.editDetails-button:hover {
+  color: aliceblue;
+  cursor: pointer;
+}

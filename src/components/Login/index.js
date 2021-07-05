@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import "./index.css";
 import { useMutation } from "@apollo/client";
 import { LOGIN_MUTATION, SIGNUP_MUTATION } from "../../graphQl/mutations";
 import { AUTH_TOKEN } from "../../constants";
@@ -57,12 +57,14 @@ const Login = () => {
   });
 
   return (
-    <div>
-      <h4>{formState.login ? "Login" : "Sign Up"}</h4>
+    <div className="login-form">
+      <h1 className="login-main-title">Welcome to Bar Buddy!</h1>
+      <h4 className="login">{formState.login ? "Login" : "Sign Up"}</h4>
       <div>
         {!formState.login && (
           <div>
             <input
+              className="login-inputs"
               value={formState.firstName}
               onChange={(e) =>
                 setFormState({
@@ -74,6 +76,7 @@ const Login = () => {
               placeholder="Your first name"
             />
             <input
+              className="login-inputs"
               value={formState.lastName}
               onChange={(e) =>
                 setFormState({
@@ -86,6 +89,7 @@ const Login = () => {
             />
             <label>are you a buisness?</label>
             <input
+              className="login-inputs"
               type="checkbox"
               value={formState.isBuisness}
               onChange={(e) =>
@@ -99,6 +103,7 @@ const Login = () => {
         )}
 
         <input
+          className="login-inputs"
           value={formState.email}
           onChange={(e) =>
             setFormState({
@@ -110,6 +115,7 @@ const Login = () => {
           placeholder="Your email address"
         />
         <input
+          className="login-inputs"
           value={formState.password}
           onChange={(e) =>
             setFormState({
@@ -118,18 +124,18 @@ const Login = () => {
             })
           }
           type="password"
-          placeholder="Choose a safe password"
+          placeholder="Password"
         />
       </div>
       <div>
         <button
-          className="pointer mr2 button"
+          className="login-button"
           onClick={formState.login ? login : signup}
         >
           {formState.login ? "login" : "create account"}
         </button>
         <button
-          className="pointer button"
+          className="login-button"
           onClick={(e) =>
             setFormState({
               ...formState,
