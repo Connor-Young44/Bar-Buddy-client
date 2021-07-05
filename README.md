@@ -12,3 +12,14 @@
 [Database layout](https://lucid.app/lucidchart/invitations/accept/inv_c26738fd-0415-48c6-9c34-6be0257b4991?viewport_loc=173%2C-47%2C1545%2C759%2C0_0)
 
 
+<h3>Tools Used</h3>
+* VSCode
+* HTML
+* CSS
+* JavaScript
+* React
+* node.js
+* express
+* graphQl
+* Apollo
+* postgres
