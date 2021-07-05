@@ -1,0 +1,30 @@
+.homePage-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: solid #deb992 1px;
+}
+
+.homePage-bar-title {
+  color: aliceblue;
+  font-size: 1.4rem;
+}
+.homePage-bar-desc {
+  margin: 2rem 2rem;
+}
+.homePage-bar-img {
+  max-width: 75%;
+  border-radius: 25px;
+}
+.homePage-bar-button {
+  margin-top: 25px;
+  border: solid #1ba098;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 2rem;
+}
+.homePage-bar-button:hover {
+  cursor: pointer;
+  color: #1ba098;
+}

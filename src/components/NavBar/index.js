@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import React from "react";
+import "./index.css";
 
 import { NavLink } from "react-router-dom";
 import { AUTH_TOKEN } from "../../constants";
@@ -26,21 +27,29 @@ const NavBar = (props) => {
   const currentBar = userData.data.me.currentBar;
   const id = userData.data.me.id;
   return (
-    <div>
-      <div>
-        <NavLink to="/">home</NavLink>
+    <div className="navbar-main">
+      <div className="navbar-body">
+        <NavLink className="navbar-link" to="/">
+          Home
+        </NavLink>
 
-        {isBuisness && <NavLink to="/barManagement">Bar Management</NavLink>}
+        {isBuisness && (
+          <NavLink className="navbar-link" to="/barManagement">
+            Bar Management
+          </NavLink>
+        )}
         {currentBar !== 0 && <LeaveBarButton id={id} />}
         {authToken ? (
           <>
-            <h3 style={{ display: "inline-block" }}>
+            <h3 className="navbar-text">
               welcome {userData.data.me.firstName}
             </h3>
             <LogoutButton />
           </>
         ) : (
-          <NavLink to="/login">login</NavLink>
+          <NavLink className="navbar-link" to="/login">
+            login
+          </NavLink>
         )}
       </div>
     </div>

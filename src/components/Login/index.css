@@ -1,0 +1,31 @@
+.login-form {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-main-title {
+  font-size: 6rem;
+  color: #1ba098;
+  text-align: center;
+}
+.login {
+  font-size: 2rem;
+}
+.login-button {
+  font-size: 1.5rem;
+  margin: 10px;
+  padding: 5px;
+  border: solid #1ba098;
+  border-radius: 10%;
+}
+.login-button:hover {
+  cursor: pointer;
+}
+.login-inputs {
+  margin: 5px;
+  border: solid #1ba098;
+  height: 1.2rem;
+}

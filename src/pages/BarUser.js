@@ -39,7 +39,7 @@ export default function BarUser() {
   //console.log(assignedTable[0]);
   return (
     <div>
-      <h1>welcome to {thisBar[0].name}</h1>
+      <h1 style={{ color: "aliceblue" }}>welcome to {thisBar[0].name}</h1>
 
       <div>
         {assignedTable.length === 0 ? (

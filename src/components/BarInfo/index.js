@@ -1,4 +1,5 @@
 import { useApolloClient, useMutation } from "@apollo/client";
+import "./index.css";
 import React, { useState } from "react";
 import { UPDATE_USER } from "../../graphQl/mutations";
 import { GET_CURRENT_USER } from "../../graphQl/queries";
@@ -25,11 +26,15 @@ export default function BarInfo(props) {
   });
 
   return (
-    <div>
-      <h3>{props.name}</h3>
-      <p>{props.desc}</p>
-      <img src={props.image} alt="bar" />
-      <button value={props.id} onClick={editUser}>
+    <div className="homePage-bar">
+      <h3 className="homePage-bar-title">{props.name}</h3>
+      <p className="homePage-bar-desc">{props.desc}</p>
+      <img className="homePage-bar-img" src={props.image} alt="bar" />
+      <button
+        className="homePage-bar-button"
+        value={props.id}
+        onClick={editUser}
+      >
         Enter this bar!
       </button>
       <p>{error}</p>

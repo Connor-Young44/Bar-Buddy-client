@@ -1,0 +1,26 @@
+.editMenu-title {
+  color: aliceblue;
+}
+.editMenu-form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 25%;
+  align-items: center;
+  justify-content: center;
+}
+.editMenu-form-title {
+  color: aliceblue;
+  font-size: 1.5rem;
+}
+.editMenu-inputs {
+  border: solid #1ba098 2px;
+  margin-bottom: 1rem;
+  color: #1ba098;
+}
+.editMenu-button {
+  border: dashed #1ba098;
+  font-size: 1.4rem;
+  padding: 10px;
+  margin-top: 5%;
+  margin-bottom: 10%;
+}

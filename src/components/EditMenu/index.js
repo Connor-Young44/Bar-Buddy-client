@@ -1,3 +1,5 @@
+import "../OrderForm/index.css";
+import "./index.css";
 import { useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
 import { AUTH_TOKEN } from "../../constants";
@@ -58,14 +60,14 @@ export default function EditMenu(props) {
   //console.log(res);
   return (
     <div>
-      <h1>Manage your menu</h1>
-      <div>
+      <h1 className="editMenu-title">Manage your menu</h1>
+      <div className="itemDeck">
         {" "}
         {res.map(
           (item) =>
             item.barId === formState.barId && (
-              <div key={item.id}>
-                <h3>
+              <div className="itemCard" key={item.id}>
+                <h3 className="orderForm-subtitle">
                   {item.name}: € {item.price}
                 </h3>
                 <img
@@ -79,20 +81,12 @@ export default function EditMenu(props) {
         )}{" "}
       </div>
       <div>
-        <form
-          onSubmit={handleSubmit}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            margin: "0 25%",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <h3>Add New Menu Item!</h3>
+        <form className="editMenu-form" onSubmit={handleSubmit}>
+          <h3 className="editMenu-form-title">Add New Menu Item!</h3>
           {/* item name */}
           <label>Name Of New Menu Item</label>
           <input
+            className="editMenu-inputs"
             value={formState.name}
             onChange={(e) =>
               setFormState({
@@ -106,6 +100,7 @@ export default function EditMenu(props) {
           {/* is Food */}
           <label>is this food?</label>
           <input
+            className="editMenu-inputs"
             value={formState.location}
             onChange={(e) =>
               setFormState({
@@ -119,6 +114,7 @@ export default function EditMenu(props) {
           {/* item description */}
           <label>Description of Menu Item</label>
           <textarea
+            className="editMenu-inputs"
             value={formState.desc}
             onChange={(e) =>
               setFormState({
@@ -134,6 +130,7 @@ export default function EditMenu(props) {
           {/* item image */}
           <label>URL link of your menu item</label>
           <input
+            className="editMenu-inputs"
             value={formState.imageUrl}
             onChange={(e) =>
               setFormState({
@@ -147,6 +144,7 @@ export default function EditMenu(props) {
           {/* price */}
           <label>How Much Does It Cost?</label>
           <input
+            className="editMenu-inputs"
             value={formState.price}
             onChange={(e) =>
               setFormState({
@@ -157,7 +155,9 @@ export default function EditMenu(props) {
             type="number"
             placeholder="price in euros"
           />
-          <button onClick={createItem}>Submit!</button>
+          <button className="editMenu-button" onClick={createItem}>
+            Submit!
+          </button>
           {error && <h3>{Error}</h3>}
         </form>
       </div>

@@ -1,3 +1,4 @@
+import "./index.css";
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { UPDATE_BAR_MUTATION } from "../../graphQl/mutations";
@@ -40,21 +41,13 @@ export default function EditBar(props) {
 
   return (
     <div>
-      <h1>Edit your Bar Details</h1>
+      <h1 className="editDetails-title">Edit your Bar Details</h1>
       <div>
-        <form
-          onSubmit={handleSubmit}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            margin: "0 25%",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+        <form onSubmit={handleSubmit} className="editDetails-form">
           {/* bar name */}
           <label>Name Of bar</label>
           <input
+            className="editDetails-inputs"
             value={formState.name}
             onChange={(e) =>
               setFormState({
@@ -68,6 +61,7 @@ export default function EditBar(props) {
           {/* bar location */}
           <label>Bar Address</label>
           <input
+            className="editDetails-inputs"
             value={formState.location}
             onChange={(e) =>
               setFormState({
@@ -81,6 +75,7 @@ export default function EditBar(props) {
           {/* bar description */}
           <label>Description of Bar</label>
           <textarea
+            className="editDetails-inputs"
             value={formState.desc}
             onChange={(e) =>
               setFormState({
@@ -96,6 +91,7 @@ export default function EditBar(props) {
           {/* bar image */}
           <label>Photo of your Bar</label>
           <input
+            className="editDetails-inputs"
             value={formState.imageUrl}
             onChange={(e) =>
               setFormState({
@@ -109,6 +105,7 @@ export default function EditBar(props) {
           {/* number of tables */}
           <label>How many tables your bar has</label>
           <input
+            className="editDetails-inputs"
             value={formState.numberOfTables}
             onChange={(e) =>
               setFormState({
@@ -119,7 +116,9 @@ export default function EditBar(props) {
             type="number"
             placeholder="number of tables"
           />
-          <button onClick={editBar}>Submit!</button>
+          <button className="editDetails-button" onClick={editBar}>
+            Submit!
+          </button>
           {error && <h3>{error}</h3>}
         </form>
       </div>

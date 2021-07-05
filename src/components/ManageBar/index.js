@@ -1,5 +1,6 @@
 import { useApolloClient } from "@apollo/client";
 import { useState } from "react";
+import "./index.css";
 
 import { GET_ALL_BARS, GET_CURRENT_USER } from "../../graphQl/queries";
 import EditBar from "../EditBar";
@@ -24,11 +25,20 @@ export default function ManageBar() {
   //console.log(thisBar[0]);
   return (
     <div>
-      <h1>Welcome To Bar Buddy!</h1>
+      <h1 style={{ color: "aliceblue" }}>Welcome To Bar Buddy!</h1>
       <h3>this is the Management window for: {thisBar[0].name}</h3>
-      <button onClick={() => setOption("editMenu")}>Edit Your Menu</button>
-      <button onClick={() => setOption("editBar")}>Edit Your Details</button>
-      <button onClick={() => setOption("goLive")}>GO LIVE!</button>
+      <button
+        className="manageBar-button"
+        onClick={() => setOption("editMenu")}
+      >
+        Edit Your Menu
+      </button>
+      <button className="manageBar-button" onClick={() => setOption("editBar")}>
+        Edit Your Details
+      </button>
+      <button className="manageBar-button" onClick={() => setOption("goLive")}>
+        GO LIVE!
+      </button>
       <div>
         {option === "editMenu" && <EditMenu bar={thisBar} />}
         {option === "editBar" && <EditBar bar={thisBar} />}

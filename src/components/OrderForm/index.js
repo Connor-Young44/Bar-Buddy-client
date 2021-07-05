@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
+import "./index.css";
 import React, { useState } from "react";
 import { AUTH_TOKEN } from "../../constants";
 import { PLACE_ORDER } from "../../graphQl/mutations";
@@ -47,27 +48,32 @@ export default function OrderForm(props) {
   if (menuItems.error) return <p> {menuItems.error.message}</p>;
   //console.log(menuItems);
   return (
-    <div>
-      <h2>Place Your Order!</h2>
+    <div className="orderForm-body">
+      <h2 className="orderForm-subtitle">Place Your Order!</h2>
       {error && <p>{error}</p>}
       {itemId.name !== "" && (
         <div>
           <h3>{itemId.name}</h3>
-          <button onClick={placeOrder}>place Your Order</button>
+          <button className="cardButton" onClick={placeOrder}>
+            place Your Order
+          </button>
         </div>
       )}
-      <div>
+      <div className="itemDeck">
         {menuItems.data.menuItems.map((item) => (
-          <div key={item.id}>
+          <div className="itemCard" key={item.id}>
             <img
               style={{ maxWidth: "200px" }}
               src={item.imageUrl}
               alt="menu item"
             />
-            <p>{item.name}</p>
+            <p style={{ color: "aliceblue", fontSize: "1.5rem" }}>
+              {item.name}
+            </p>
             <p>{item.desc}</p>
-            <p>€ {item.price}</p>
+            <p style={{ color: "aliceblue" }}>€ {item.price}</p>
             <button
+              className="cardButton"
               onClick={() => {
                 setItemId({ id: item.id, name: item.name });
               }}

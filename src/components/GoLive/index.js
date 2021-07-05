@@ -1,3 +1,4 @@
+import "./index.css";
 import { useMutation, useQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import { AUTH_TOKEN } from "../../constants";
@@ -19,7 +20,7 @@ export default function GoLive(props) {
   const authToken = localStorage.getItem(AUTH_TOKEN);
   const ID = parseInt(props.bar[0].id);
   const orders = useQuery(GET_ORDERS, {
-    pollInterval: 20000,
+    pollInterval: 10000,
   });
   const { loading, error, data, subscribeToMore } = useQuery(GET_USERS, {
     pollInterval: 10000,
@@ -57,7 +58,7 @@ export default function GoLive(props) {
 
   const Tables = useQuery(GET_TABLES, {
     variables: { barId: ID },
-    pollInterval: 20000,
+    pollInterval: 10000,
   });
 
   //mutation define for changing table number
@@ -93,39 +94,41 @@ export default function GoLive(props) {
   });
 
   return (
-    <div>
-      <h1>live Bar updates!</h1>
-      <div>
-        <h5>Users in Bar</h5>
+    <div className="goLive-body">
+      <h1 className="goLive-title">live Bar updates!</h1>
+      <div className="goLive-users">
+        <h5 className="goLive-subtitle">Users in Bar</h5>
         {data.users.length === 0 && <p>No users is Bar</p>}
         {data.users.map((user) => (
           <div key={user.id}>
-            <p>
-              User no. {user.id}: {user.firstName}
-              {user.lastName}
+            <p style={{ color: "aliceblue" }}>
+              User no. {user.id}: {user.firstName} {user.lastName}
             </p>
           </div>
         ))}
-        <h3>live orders</h3>
+        <h3 className="goLive-subtitle">live orders</h3>
         {orders.data.orders.length > 0 &&
           orders.data.orders.map((order) => (
             <div key={order.id}>
-              <p>
+              <p style={{ color: "aliceblue" }}>
                 {order.qty} {order.menuItems[0].name} Table Number:{" "}
                 {order.tableId}
               </p>
             </div>
           ))}
 
-        <h3>Table manager</h3>
+        <h3 className="goLive-subtitle">Table manager</h3>
         {sortedTables.map((table) => (
           <div key={table.id}>
-            <h3>Table: {table.number} </h3>
+            <h3 style={{ color: "aliceblue" }}>Table: {table.number} </h3>
 
             {table.occupiedBy !== 0 ? (
               <div>
-                <p>Occupied by user number: {table.occupiedBy}</p>
+                <p style={{ color: "#1ba098" }}>
+                  Occupied by user number: {table.occupiedBy}
+                </p>
                 <button
+                  className="table-button"
                   onClick={() =>
                     setTable({
                       ...Table,
@@ -138,7 +141,9 @@ export default function GoLive(props) {
                   clear Table
                 </button>
                 {Table.clicked && (
-                  <button onClick={editTable}>Confirm changes</button>
+                  <button className="table-button" onClick={editTable}>
+                    Confirm changes
+                  </button>
                 )}
               </div>
             ) : (
@@ -162,7 +167,9 @@ export default function GoLive(props) {
                   ))}
                 </select>
                 {Table.clicked && (
-                  <button onClick={editTable}>Confirm changes</button>
+                  <button className="table-button" onClick={editTable}>
+                    Confirm changes
+                  </button>
                 )}
               </>
             )}
