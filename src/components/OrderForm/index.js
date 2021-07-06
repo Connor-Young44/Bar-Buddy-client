@@ -10,6 +10,7 @@ export default function OrderForm(props) {
     id: 0,
     name: "",
   });
+  const [amount, setAmount] = useState(0);
   const [error, setError] = useState("");
   const authToken = localStorage.getItem(AUTH_TOKEN);
   //get all menu items for order choice
@@ -30,7 +31,7 @@ export default function OrderForm(props) {
     variables: {
       served: false,
       closed: false,
-      qty: 1,
+      qty: Number(amount),
       userId: Number(props.userId),
       tableId: Number(props.tableId),
       menuItemId: Number(itemId.id),
@@ -40,6 +41,7 @@ export default function OrderForm(props) {
       //console.log({ error });
     },
     onCompleted: ({ createBar }) => {
+      setAmount(0);
       alert("order Placed!", itemId.name);
     },
   });
@@ -53,7 +55,9 @@ export default function OrderForm(props) {
       {error && <p>{error}</p>}
       {itemId.name !== "" && (
         <div>
-          <h3>{itemId.name}</h3>
+          <h3>
+            {amount} {itemId.name}
+          </h3>
           <button className="cardButton" onClick={placeOrder}>
             place Your Order
           </button>
@@ -72,6 +76,11 @@ export default function OrderForm(props) {
             </p>
             <p>{item.desc}</p>
             <p style={{ color: "aliceblue" }}>€ {item.price}</p>
+            <input
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
             <button
               className="cardButton"
               onClick={() => {
