@@ -2,7 +2,7 @@ import "./index.css";
 import { useMutation, useQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import { AUTH_TOKEN } from "../../constants";
-import { EDIT_TABLE } from "../../graphQl/mutations";
+import { EDIT_ORDER, EDIT_TABLE } from "../../graphQl/mutations";
 import {
   GET_LIVE_USERS,
   GET_ORDERS,
@@ -14,6 +14,12 @@ export default function GoLive(props) {
   const [Table, setTable] = useState({
     id: 0,
     occupiedBy: 0,
+    clicked: false,
+  });
+  const [order, setOrder] = useState({
+    id: 0,
+    served: false,
+    closed: false,
     clicked: false,
   });
 
@@ -80,7 +86,24 @@ export default function GoLive(props) {
       alert("user cleared, please wait to update");
     },
   });
-  console.log(Table);
+  //console.log(order);
+  const [editOrder] = useMutation(EDIT_ORDER, {
+    headers: {
+      authorization: `${authToken}`,
+    },
+    variables: {
+      id: parseInt(order.id),
+      served: order.served,
+      closed: order.served,
+    },
+    onError: (error) => {
+      <p>{error.message}</p>;
+    },
+    onCompleted: ({ editOrder }) => {
+      setOrder({ ...order, clicked: false });
+    },
+  });
+  //console.log(Table);
   //deal with loading data
   if (Tables.loading || loading || orders.loading) return <p>"loading...";</p>;
   if (Tables.error || error || orders.error)
@@ -92,7 +115,7 @@ export default function GoLive(props) {
   const sortedTables = newRes.sort((a, b) => {
     return parseInt(a.number) - parseInt(b.number);
   });
-
+  //console.log(order);
   return (
     <div className="goLive-body">
       <h1 className="goLive-title">live Bar updates!</h1>
@@ -108,14 +131,31 @@ export default function GoLive(props) {
         ))}
         <h3 className="goLive-subtitle">live orders</h3>
         {orders.data.orders.length > 0 &&
-          orders.data.orders.map((order) => (
-            <div key={order.id}>
-              <p style={{ color: "aliceblue" }}>
-                {order.qty} {order.menuItems[0].name} Table Number:{" "}
-                {order.tableId}
-              </p>
-            </div>
-          ))}
+          orders.data.orders.map(
+            (Order) =>
+              !Order.served && (
+                <div key={Order.id}>
+                  <p style={{ color: "aliceblue" }}>
+                    {Order.qty} {Order.menuItems[0].name} Table Number:{" "}
+                    {Order.tableId}
+                  </p>
+                  <button
+                    onClick={() =>
+                      setOrder({
+                        id: parseInt(Order.id),
+                        served: true,
+                        clicked: true,
+                      })
+                    }
+                  >
+                    click to serve order
+                  </button>
+                  {order.clicked && (
+                    <button onClick={editOrder}>Confirm Served </button>
+                  )}
+                </div>
+              )
+          )}
 
         <h3 className="goLive-subtitle">Table manager</h3>
         {sortedTables.map((table) => (

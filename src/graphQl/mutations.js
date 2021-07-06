@@ -152,6 +152,14 @@ export const PLACE_ORDER = gql`
     }
   }
 `;
+export const EDIT_ORDER = gql`
+  mutation EditOrderMutation($id: Int!, $served: Boolean, $closed: Boolean) {
+    editOrder(id: $id, served: $served, closed: $closed) {
+      id
+      served
+    }
+  }
+`;
 
 export const EDIT_TABLE = gql`
   mutation EditTableMutation($id: Int!, $occupiedBy: Int) {
