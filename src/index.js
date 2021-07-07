@@ -25,7 +25,7 @@ const httpLink = new HttpLink({
 });
 //web socket link
 const wsLink = new WebSocketLink({
-  uri: "ws://barbuddy.herokuapp.com/subscriptions",
+  uri: "wss://barbuddy.herokuapp.com/subscriptions",
 
   options: {
     reconnect: true,
