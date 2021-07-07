@@ -1,5 +1,6 @@
 import "../OrderForm/index.css";
 import "./index.css";
+import Spinner from "../Spinner";
 import { useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
 import { AUTH_TOKEN } from "../../constants";
@@ -51,7 +52,7 @@ export default function EditMenu(props) {
   });
 
   //deal with loading data
-  if (loading) return "loading...";
+  if (loading) return <Spinner />;
   //deal with errors
   if (error) return <p>Error! {error.message}</p>;
 
@@ -71,7 +72,7 @@ export default function EditMenu(props) {
                   {item.name}: € {item.price}
                 </h3>
                 <img
-                  style={{ maxWidth: "150px" }}
+                  style={{ maxWidth: "200px", height: "150px" }}
                   src={item.imageUrl}
                   alt="item img should be here"
                 />

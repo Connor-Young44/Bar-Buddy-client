@@ -1,5 +1,6 @@
 import React from "react";
 import "./HomePage.css";
+import Spinner from "../components/Spinner";
 import { useQuery } from "@apollo/client";
 
 //import query
@@ -16,19 +17,14 @@ export default function HomePage() {
     },
     //fetchPolicy: "network-only",
   });
-  if (userData.loading) return "loading..";
+  if (userData.loading) return <Spinner />;
 
   if (userData.error) return <p> {userData.error.message};</p>;
-
-  //console.log("me data", userData.data.me);
-  //query for all bars
-
   //deal with loading data
-  if (loading) return "loading...";
+  if (loading) return <Spinner />;
   //deal with errors
   if (error) return <p>Error! {error.message}</p>;
 
-  //console.log(data.bars);
   const res = data.bars;
 
   return (

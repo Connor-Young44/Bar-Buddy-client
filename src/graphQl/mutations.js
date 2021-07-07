@@ -160,7 +160,25 @@ export const EDIT_ORDER = gql`
     }
   }
 `;
-
+export const CREATE_TABLE_MUTATION = gql`
+  mutation CreateTableMutation(
+    $number: Int!
+    $seats: Int!
+    $occupiedBy: Int
+    $isFree: Boolean
+    $barId: Int!
+  ) {
+    createTable(
+      number: $number
+      seats: $seats
+      occupiedBy: $occupiedBy
+      isFree: $isFree
+      barId: $barId
+    ) {
+      number
+    }
+  }
+`;
 export const EDIT_TABLE = gql`
   mutation EditTableMutation($id: Int!, $occupiedBy: Int) {
     editTable(id: $id, occupiedBy: $occupiedBy) {

@@ -1,4 +1,5 @@
 import "./index.css";
+import Spinner from "../Spinner";
 import { useMutation, useQuery } from "@apollo/client";
 import React, { useEffect, useState } from "react";
 import { AUTH_TOKEN } from "../../constants";
@@ -105,7 +106,7 @@ export default function GoLive(props) {
   });
   //console.log(Table);
   //deal with loading data
-  if (Tables.loading || loading || orders.loading) return <p>"loading...";</p>;
+  if (Tables.loading || loading || orders.loading) return <Spinner />;
   if (Tables.error || error || orders.error)
     return <p>Error! {orders.error}</p>;
 

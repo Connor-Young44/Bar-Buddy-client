@@ -55,9 +55,11 @@ export default function OrderForm(props) {
       {error && <p>{error}</p>}
       {itemId.name !== "" && (
         <div>
-          <h3>
-            {amount} {itemId.name}
-          </h3>
+          {amount !== 0 && (
+            <h3>
+              {amount} {itemId.name}
+            </h3>
+          )}
           <button className="cardButton" onClick={placeOrder}>
             place Your Order
           </button>
@@ -67,7 +69,7 @@ export default function OrderForm(props) {
         {menuItems.data.menuItems.map((item) => (
           <div className="itemCard" key={item.id}>
             <img
-              style={{ maxWidth: "200px" }}
+              style={{ maxWidth: "200px", height: "150px" }}
               src={item.imageUrl}
               alt="menu item"
             />

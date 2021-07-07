@@ -1,9 +1,14 @@
 import "./index.css";
 import { useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { UPDATE_BAR_MUTATION } from "../../graphQl/mutations";
+import {
+  UPDATE_BAR_MUTATION,
+  CREATE_TABLE_MUTATION,
+} from "../../graphQl/mutations";
+import { AUTH_TOKEN } from "../../constants";
 
 export default function EditBar(props) {
+  const authToken = localStorage.getItem(AUTH_TOKEN);
   const bar = props.bar[0];
   const [error, setError] = useState("");
   const [formState, setFormState] = useState({
@@ -15,6 +20,7 @@ export default function EditBar(props) {
     numberOfTables: bar.numberOfTables,
     userId: bar.userId,
   });
+  const [tableState, setTableState] = useState({ number: "", seats: "" });
   //console.log(bar);
   //define update mutation
   const [editBar] = useMutation(UPDATE_BAR_MUTATION, {
@@ -35,10 +41,29 @@ export default function EditBar(props) {
       window.location.href = "/barManagement";
     },
   });
+  const [createTable] = useMutation(CREATE_TABLE_MUTATION, {
+    headers: {
+      authorization: `${authToken}`,
+    },
+    variables: {
+      number: parseInt(tableState.number),
+      seats: parseInt(tableState.seats),
+      occupiedBy: 0,
+      isFree: true,
+      barId: parseInt(bar.id),
+    },
+    onError: (error) => {
+      setError(error.message);
+      //console.log({ error });
+    },
+    onCompleted: ({ createBar }) => {
+      setTableState({ number: "", seats: "" });
+    },
+  });
   const handleSubmit = (event) => {
     event.preventDefault();
   };
-
+  //console.log(tableState);
   return (
     <div>
       <h1 className="editDetails-title">Edit your Bar Details</h1>
@@ -117,6 +142,42 @@ export default function EditBar(props) {
             placeholder="number of tables"
           />
           <button className="editDetails-button" onClick={editBar}>
+            Submit!
+          </button>
+          {error && <h3>{error}</h3>}
+        </form>
+        <h1 className="editDetails-title">Add a New Table</h1>
+        <form onSubmit={handleSubmit} className="editDetails-form">
+          {/* table number */}
+          <label>Table Number</label>
+          <input
+            className="editDetails-inputs"
+            value={tableState.number}
+            onChange={(e) =>
+              setTableState({
+                ...tableState,
+                number: Number(e.target.value),
+              })
+            }
+            type="number"
+            placeholder="table number"
+          />
+          {/* number of seats */}
+          <label>Number of Seats</label>
+          <input
+            className="editDetails-inputs"
+            value={tableState.seats}
+            onChange={(e) =>
+              setTableState({
+                ...tableState,
+                seats: Number(e.target.value),
+              })
+            }
+            type="number"
+            placeholder="how many seats"
+          />
+          {/* submit create table */}
+          <button className="editDetails-button" onClick={createTable}>
             Submit!
           </button>
           {error && <h3>{error}</h3>}

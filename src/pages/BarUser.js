@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import React from "react";
 import OrderForm from "../components/OrderForm";
 import { AUTH_TOKEN } from "../constants";
-
+import Spinner from "../components/Spinner";
 import { GET_ALL_BARS, GET_CURRENT_USER } from "../graphQl/queries";
 
 export default function BarUser() {
@@ -20,7 +20,7 @@ export default function BarUser() {
   });
 
   //provide loading/error handlers
-  if (userData.loading || allBars.loading) return "loading..";
+  if (userData.loading || allBars.loading) return <Spinner />;
   if (userData.error || allBars.error) return <p>ERROR;</p>;
 
   //get users current bar from user info
@@ -43,7 +43,10 @@ export default function BarUser() {
 
       <div>
         {assignedTable.length === 0 ? (
-          <h3>Please Wait To Be Seated :) </h3>
+          <div>
+            <h3>Please Wait To Be Seated :) </h3>
+            <Spinner />
+          </div>
         ) : (
           <h2>Table Number: {assignedTable[0].number}</h2>
         )}
