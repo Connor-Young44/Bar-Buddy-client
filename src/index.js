@@ -16,7 +16,7 @@ import { split } from "apollo-link";
 
 //link for mutation and quiris
 const httpLink = new HttpLink({
-  uri: "https://barbuddy.herokuapp.com/graphQl",
+  uri: "https://barbuddy.herokuapp.com/graphql",
   headers: {
     authorization: localStorage.getItem(AUTH_TOKEN),
     "client-name": "WidgetX Ecom [web]",
